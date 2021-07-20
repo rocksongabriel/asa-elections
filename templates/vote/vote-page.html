@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Vote for your favorite {{ category.name }}{% endblock title %}
+
+
+{% block content %}
+    <div id="vote-app" class="my-16 md:my-20">
+
+        <p class="text-center bg-gray-800 shadow-md text-gray-100 text-4xl sm:text-6xl font-extrabold py-6 mb-2 ">{{ category.name }}</p>
+
+        <div class="mx-2 md:mx-5 lg:mx-10 my-5 md:my-10">
+
+            <!--
+                display:
+                    - the candidate name
+                    - the candidate picture
+                    - a vote button beneath each candidate
+                    - a hidden field for the upvote, that will be ticked when the vote button is clicked
+            -->
+
+            <form method="POST" enctype=multipart/form-data id="vote-form">
+                {% csrf_token %}
+
+                {{ formset.management_form }}
+
+                {% for error in errors %}
+                    {{ error }}
+                {% endfor %}
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5">
+
+                    {% for form in formset %}
+                            <div class="hidden"> <!-- ender the form with it's corresponding values -->
+                                {{ form.id }}
+                                {{ form.full_name }}
+                                {{ form.picture }}
+                                {{ form.category }}
+                                {{ form.number_of_votes }}
+                            </div>
+
+                            <div class="shadow-2xl p-5" data-aos="flip-left" data-aos-delay="50" data-aos-duration="1200"> <!-- showcase the info on the candidate that the voter should see -->
+                                <!-- render the name of the candidate from the form-->
+                                <h1 class="text-3xl text-center text-gray-800 py-4 font-bold">{{ form.full_name.value }}</h1> 
+
+                                <!-- render the picture of the candidate from the form-->
+                                <div class="relative">
+                                    <img src="{{form.instance.picture.url}}"" class="w-full h-80 rounded-md">
+                                    <h3 
+                                        class="bg-gray-800 py-3 w-full text-center text-green-500 absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 text-6xl font-extrabold hidden voted-label checkbox_{{ form.full_name.value|slugify }} transition delay-100 duration-100">
+                                        Upvoted
+                                    </h3>
+                                </div>
+
+                                <!-- button to upvote this candidate -->
+                                <div class="mt-5">
+                                    <input class="checkbox_{{ form.full_name.value|slugify }} input-checkbox hidden" type="checkbox" name="upvote_{{ form.full_name.value|slugify }}" id="upvote_{{ form.full_name.value|slugify }}">
+                                    <button type="button" style="width: 100%" class="checkbox-btn focus:outline-none transition delay-100 duration-100">
+                                        <label 
+                                            for="upvote_{{ form.full_name.value|slugify }}"
+                                            class="block text-center bg-purple-600 hover:bg-purple-700 p-3 text-white font-bold text-xl rounded-md cursor-pointer checkbox-label">
+                                            Vote <i class="fas fa-vote-yea ml-3"></i>
+                                        </label>
+                                    </button>
+
+                                </div>
+                            </div>
+                    {% endfor %}
+                </div>
+
+            <div class="flex mt-10">
+                <button class="bg-blue-600 py-3 px-8 w-full text-2xl font-bold text-white rounded-md hover:bg-blue-700 focus:outline-none">Submit Vote <i class="fas fa-inbox ml-3"></i></button>
+            </div>
+            </form>
+
+        </div>
+    </div>
+{% endblock content %}
+
+{% block extra_js %}<script src="{% static 'js/custom/vote.js' %}"></script>{% endblock %}

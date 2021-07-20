@@ -1,0 +1,100 @@
+{% extends 'base.html' %} 
+
+{% block title %}Login to vote{% endblock title %} 
+
+
+{%block content %}
+
+<div class="flex justify-center lg:my-36 md:mt-16 my-12">
+  <div class="bg-white p-5 shadow-2xl rounded-md w-full sm:w-3/4 md:w-96 py-10">
+    <h1 
+        class="text-center text-3xl font-extrabold pb-2 text-gray-700 border-b-2 border-gray-900 mb-5 font-arvo"
+    >
+        Login to Vote
+    </h1>
+
+    <form method="POST" class="">
+        {% csrf_token %} 
+        {% if form.non_field_errors %}
+        <div class="my-3">
+        {% for error in form.non_field_errors %}
+        <p class="text-red-600 font-bold">{{ error }}</p>
+        {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Username group -->
+        <div class="mt-4">
+            <label 
+                for="{{ form.username.id_for_label }}" 
+                class="text-gray-800 font-bold text-lg py-2"
+            >
+                Student ID
+            </label>
+            <input
+                type="text"
+                name="{{ form.username.name }}"
+                autofocus
+                autocapitalize="none"
+                autocomplete="username"
+                maxlength="{{ form.username.max_length }}"
+                {% if form.username.field.required %}required{% endif %}
+                id="{{ form.username.id_for_label }}"
+                class="w-full border-2 border-gray-800 p-2 focus:outline-none focus:border-purple-600"
+            />
+        </div>
+
+        <!-- Password group -->
+        <div class="mt-5">
+            <label 
+                for="{{ form.password.id_for_label }}" 
+                class="text-gray-800 font-bold text-lg py-2"
+            >
+                Password
+            </label>
+            <input
+                type="password"
+                name="{{ form.password.name }}"
+                autocomplete="current-password"
+                required
+                id="{{ form.password.id_for_label }}"
+                class="w-full border-2 border-gray-800 p-2 focus:outline-none focus:border-purple-600"
+            />
+        </div>
+
+        <div class="my-5 flex">
+            <input type="checkbox" name="togglePassword" id="togglePassword" class="border-2 border-purple-800 mr-3"> 
+            <span class="text-blue-700 font-bold">Show Password</span>
+        </div>
+
+        <button
+        type="submit"
+        class="font-bold text-xl py-2 px-5 w-full bg-blue-600 text-white hover:bg-blue-700 rounded-md"
+        >
+        Login
+        </button>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}
+
+
+{% block extra_js %}
+
+<script>
+
+const password = document.getElementById("{{ form.password.id_for_label }}");
+const togglePassword = document.getElementById("togglePassword");
+
+togglePassword.addEventListener("change", (event) => {
+    if (togglePassword.checked) {
+        password.setAttribute("type", "text");
+    } else {
+        password.setAttribute("type", "password");
+    }
+})
+
+</script>
+
+{% endblock extra_js %}

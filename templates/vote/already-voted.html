@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Already Voted{% endblock title %}
+
+
+{% block content %}
+    <div class="bg-gray-200 shadow-xl w-full py-10 md:px-5 my-32 md:my-44" data-aos="zoom-in-up" data-aos-delay="200" data-aos-duration="2000">
+        <h1 class="text-5xl md:text-6xl font-bold text-center text-green-800">You have already voted in this category, please vote in the others</h1>
+
+       <div class="flex justify-center mt-6">
+            <a href="{% url 'vote_app:vote-categories' %}" class="px-4 py-4 bg-red-700 text-xl text-white rounded-sm font-bold">Continue Voting</a>
+        </div>
+    </div>
+{% endblock content %}
