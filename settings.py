@@ -51,6 +51,7 @@ INSTALLED_APPS.extend([
 
     "users.apps.UsersConfig",
     "pages.apps.PagesConfig",
+    "vote_app.apps.VoteAppConfig",
 ])
 
 # To see the settings that have been applied, use the Django diffsettings 
