@@ -10,6 +10,7 @@ urlpatterns = [
     # add your own patterns here
 
     path("", include("pages.urls", namespace="pages")),
+    path("voting/", include("vote_app.urls", namespace="vote_app")),
 
 ] + aldryn_addons.urls.patterns() + i18n_patterns(
     # add your own i18n patterns here
