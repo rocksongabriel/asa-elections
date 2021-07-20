@@ -40,6 +40,8 @@ class CustomUserManager(UserManager):
                           fail_silently=False)
                 print("----------------- Credentials Sent ----------------")
 
+    # TODO - create a method that will take a Student ID, email and create an account and email the credentials to the email
+
 
 class User(AbstractUser):
     """Model to represent a user"""
@@ -50,3 +52,5 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+

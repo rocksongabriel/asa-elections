@@ -5,6 +5,7 @@
 #   http://docs.divio.com/en/latest/reference/configuration-settings-file.html
 #
 # and comments below.
+import os
 
 
 # INSTALLED_ADDONS is a list of self-configuring Divio Cloud addons - see the
@@ -44,6 +45,7 @@ aldryn_addons.settings.load(locals())
 
 INSTALLED_APPS.extend([
     # Extend the INSTALLED_APPS setting by listing additional applications here
+    "django.contrib.postgres",
 
     "django_extensions",
 
@@ -55,6 +57,22 @@ INSTALLED_APPS.extend([
 # See https://docs.divio.com/en/latest/how-to/configure-settings.html#list
 
 
+# Media settings
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join('/data/media/')
+
+SITE_ID = 1
+
+
+
 AUTH_USER_MODEL = "users.User"
 
 SHELL_PLUS = "bpython"
+
+# SSL Redirect to HTTPS
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True # Redirect to https if user hits http
+
+
+# TODO - add email settings
+
