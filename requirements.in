@@ -3,3 +3,7 @@ https://divio-addons.s3-eu-central-1.amazonaws.com/aldryn-addons/2.0.1/75074b5c-
 https://divio-addons.s3-eu-central-1.amazonaws.com/aldryn-django/2.2.24.0/be8e3006-1533-4931-92e2-e9f3a3ae2876/aldryn-django-2.2.24.0.tar.gz#egg=aldryn-django==2.2.24.0
 https://divio-addons.s3-eu-central-1.amazonaws.com/aldryn-sso/2.0.0/e6eccefa-e8f5-492d-8e71-79fc99f30201/aldryn-sso-2.0.0.tar.gz#egg=aldryn-sso==2.0.0
 # </INSTALLED_ADDONS>
+django-extensions==3.1.3
+django-debug-toolbar==3.2.1 
+Werkzeug==2.0.1
+bpython==0.21
