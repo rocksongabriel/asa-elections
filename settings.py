@@ -50,6 +50,7 @@ INSTALLED_APPS.extend([
     "django_extensions",
 
     "users.apps.UsersConfig",
+    "pages.apps.PagesConfig",
 ])
 
 # To see the settings that have been applied, use the Django diffsettings 
