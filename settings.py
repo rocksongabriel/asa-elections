@@ -45,6 +45,8 @@ aldryn_addons.settings.load(locals())
 INSTALLED_APPS.extend([
     # Extend the INSTALLED_APPS setting by listing additional applications here
 
+    "django_extensions",
+
     "users.apps.UsersConfig",
 ])
 
@@ -54,3 +56,5 @@ INSTALLED_APPS.extend([
 
 
 AUTH_USER_MODEL = "users.User"
+
+SHELL_PLUS = "bpython"
