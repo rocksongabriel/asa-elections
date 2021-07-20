@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* custom utils */
+.footer-icon {
+    @apply text-4xl rounded-full text-white cursor-pointer hover:text-gray-400 transition delay-200 duration-200 ease-linear;
+}
+
+.cta-btn {
+    @apply w-full text-2xl font-bold text-white py-5 md:mx-2 rounded-2xl transition delay-150 duration-150 ease-linear;
+}
