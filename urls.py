@@ -11,6 +11,7 @@ urlpatterns = [
 
     path("", include("pages.urls", namespace="pages")),
     path("voting/", include("vote_app.urls", namespace="vote_app")),
+    path("users/", include("users.urls", namespace="users")),
 
 ] + aldryn_addons.urls.patterns() + i18n_patterns(
     # add your own i18n patterns here
