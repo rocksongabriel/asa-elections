@@ -87,6 +87,49 @@
 
   <!-- Footer -->
   {% block footer %}
+
+  <footer class="mt-auto">
+
+    <!-- Container for the footer -->
+    <div 
+      class="flex px-4 md:px-8 lg:px-16 md:text-justify flex-col md:flex-row md:justify-evenly py-5 bg-gray-800 text-white space-y-10 md:space-y-0"
+    >
+
+      <!--Section for the links -->
+      <div class="">
+        <h2 class="text-3xl font-bold text-center"><span class="text-red-600 font-lato">ASA</span>elections 2021</h2>
+        <div class="flex flex-col space-y-2 px-10">
+          <h3 class="text-xl border-b text-center font-bold text-blue-500 mt-4 uppercase font-raleway pb-1">Useful Links</h3>
+          <a href="#" class="text-lg hover:text-gray-400 font-arvo transition delay-75 duration-75">electoral board members</a>
+          <a href="#" class="text-lg hover:text-gray-400 font-arvo transition delay-75 duration-75">election results</a>
+          <a href="#" class="text-lg hover:text-gray-400 font-arvo transition delay-75 duration-75">contact support</a>
+          <a href="#" class="text-lg hover:text-gray-400 font-arvo transition delay-75 duration-75">info on voting</a>
+        </div>
+      </div>
+
+      <!-- Section for my promotion -->
+      <div class="px-10">
+        <h3 class="text-xl font-semibold text-gray-300 font-raleway">Built By Gabriel Rockson</h3>
+        <div class="flex flex-col space-y-2 md:space-y-6 mt-5">
+          <a href="https://github.com/rocksongabriel" class="text-blue-400 hover:text-blue-200 font-arvo">
+            <i class="fab fa-github text-2xl mr-2 text-white"></i> Visit my Github
+          </a>
+          <a href="https://twitter.com/gabbyrockson" class="text-blue-400 hover:text-blue-200 font-arvo">
+            <i class="fab fa-twitter text-2xl mr-2 text-white"></i> Follow me on Twitter
+          </a>
+          <a href="https://www.linkedin.com/in/gabriel-rockson-817b4a211/" class="text-blue-400 hover:text-blue-200 font-arvo">
+            <i class="fab fa-linkedin text-2xl mr-2 text-white"></i> Let's connect on LinkedIn
+          </a>
+          <a href="mailto:thegabrielrockson@gmail.com" class="text-blue-400 hover:text-blue-200 font-arvo">
+            <i class="fas fa-envelope text-2xl mr-2 text-white"></i> Send me an E-mail
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </footer>
+
   {% endblock footer %}
 
   <script>
