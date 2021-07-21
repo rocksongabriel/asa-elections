@@ -1,16 +1,16 @@
-{% extends 'base.html' %} 
+{% extends 'new-base.html' %} 
 
 {% block title %}Login to vote{% endblock title %} 
 
 
 {%block content %}
 
-<div class="flex justify-center lg:my-36 md:mt-16 my-12">
-  <div class="bg-white p-5 shadow-2xl rounded-md w-full sm:w-3/4 md:w-96 py-10">
+<div class="flex justify-center lg:my-28 md:mt-16 my-12 mx-5">
+  <div class="bg-gray-900 p-5 shadow-2xl w-full sm:w-3/4 md:w-96 py-10">
     <h1 
-        class="text-center text-3xl font-extrabold pb-2 text-gray-700 border-b-2 border-gray-900 mb-5 font-arvo"
+        class="text-center text-3xl font-extrabold pb-2 text-gray-100  mb-5 font-arvo"
     >
-        Login to Vote
+        Login
     </h1>
 
     <form method="POST" class="">
@@ -27,7 +27,7 @@
         <div class="mt-4">
             <label 
                 for="{{ form.username.id_for_label }}" 
-                class="text-gray-800 font-bold text-lg py-2"
+                class="text-gray-200 font-bold text-lg py-2"
             >
                 Student ID
             </label>
@@ -48,7 +48,7 @@
         <div class="mt-5">
             <label 
                 for="{{ form.password.id_for_label }}" 
-                class="text-gray-800 font-bold text-lg py-2"
+                class="text-gray-200 font-bold text-lg py-2"
             >
                 Password
             </label>
@@ -64,12 +64,12 @@
 
         <div class="my-5 flex">
             <input type="checkbox" name="togglePassword" id="togglePassword" class="border-2 border-purple-800 mr-3"> 
-            <span class="text-blue-700 font-bold">Show Password</span>
+            <span class="text-white font-bold">tick to show password</span>
         </div>
 
         <button
         type="submit"
-        class="font-bold text-xl py-2 px-5 w-full bg-blue-600 text-white hover:bg-blue-700 rounded-md"
+        class="font-bold text-xl py-2 px-5 w-full bg-green-600 text-black hover:bg-green-700"
         >
         Login
         </button>
@@ -78,6 +78,15 @@
 </div>
 
 {% endblock content %}
+
+
+{% block footer %}
+
+<footer class="bg-black text-white text-center py-3 font-thin mt-auto font-raleway">
+    ASAElections 2021
+</footer>
+
+{% endblock footer %}
 
 
 {% block extra_js %}
