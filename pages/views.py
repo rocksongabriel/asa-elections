@@ -8,7 +8,7 @@ from django.utils.html import strip_tags
 
 
 class HomePage(TemplateView):
-    template_name = "pages/homepage.html"
+    template_name = "pages/new-homepage.html"
     form_class = SupportForm
 
     def support_request_mail(self, full_name, student_id, email_address, msg):

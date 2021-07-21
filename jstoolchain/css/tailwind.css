@@ -12,3 +12,16 @@
 .cta-btn {
     @apply w-full text-2xl font-bold text-white py-5 md:mx-2 rounded-2xl transition delay-150 duration-150 ease-linear;
 }
+
+.nav-link {
+    @apply font-semibold hover:text-blue-600 font-mono transition delay-100 duration-100 ease-in;
+}
+
+.mobile-nav-link {
+    @apply 
+        py-3 px-4 md:px-8 
+        text-xl hover:bg-gray-900 text-black hover:text-white 
+        font-mono 
+        transition delay-75 duration-100 ease-in-out
+        focus:bg-gray-900 focus:text-white;
+}
