@@ -3,7 +3,8 @@ let form = document.getElementById("vote-form");
 let checkboxes = document.getElementsByClassName("input-checkbox");
 let vote_buttons = document.getElementsByClassName("checkbox-btn");
 let labels = document.getElementsByClassName("checkbox-label");
-voted_labels = document.getElementsByClassName("voted-label");
+let clear_vote_btn = document.getElementById("clearVoteBtn");
+let voted_labels = document.getElementsByClassName("voted-label");
 
 
 // Reload the page when a user tries to go back
@@ -31,27 +32,55 @@ form.addEventListener("submit", (event) => {
 // This will ensure that even if a voter refreshes their page 
 // they wouldn't have accidentally voted twice
 window.addEventListener("load", () => {
-    console.log("Page has loaded");
     for (checkbox of checkboxes) {
         checkbox.checked = false;
     }
 })
 
+// Remove votes 
+clear_vote_btn.addEventListener("click", () => {
+    // hide the voted label
+    for (checkbox of checkboxes) {
+        if (checkbox.checked) {
+            identifier_class = checkbox.classList[0]; // the classname to get the voted label to display
+            for (voted_label of voted_labels) {
+                if (voted_label.classList.contains(identifier_class)) {
+                    voted_label.classList.add("hidden"); // hide the voted text
+                }
+            }
+        }
+    }
+
+    // uncheck the checkboxes
+    for (checkbox of checkboxes) {
+        checkbox.checked = false;
+    }
+
+    // enable the vote buttons 
+    for (button of vote_buttons) {
+        button.classList.remove("pointer-events-none");
+    }
+
+    // remove the opacity on the labels
+    for (label of labels) {
+        label.classList.remove("opacity-50");
+    }
+})
 
 // Check if the user has clicked on a vote button
 // If he has, disable all the buttons
 for (checkbox of checkboxes) {
-    checkbox.addEventListener("change", (event) => {
+    checkbox.addEventListener("change", () => {
         for (button of vote_buttons) {
             button.classList.add("pointer-events-none"); // disable the button 
         }
         for (label of labels) {
-            label.classList.add("opacity-80");
+            label.classList.add("opacity-50");
         }
 
         for (checkbox of checkboxes) {
             if (checkbox.checked) {
-                identifier_class = checkbox.classList[0]; // the classname to get he voted label to display
+                identifier_class = checkbox.classList[0]; // the classname to get the voted label to display
                 for (voted_label of voted_labels) {
                     if (voted_label.classList.contains(identifier_class)) {
                         voted_label.classList.remove("hidden"); // show the voted text
