@@ -49,6 +49,6 @@ class HomePage(TemplateView):
                 form.cleaned_data["email_address"],
                 form.cleaned_data["message"]
             )
-            return render(request, template_name="pages/complaint-submitted.html")
+            return render(request, template_name="pages/new-complain-submitted.html")
         return render(request, self.template_name, {"form": form})
 

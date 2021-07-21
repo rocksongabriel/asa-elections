@@ -1,0 +1,24 @@
+{% extends 'new-base.html' %}
+
+{% block title %}Election Categories{% endblock title %}
+
+
+{% block content %}
+    <div class="mx:2 sm:mx-10 my-16 md:my-20 text-raleway" >
+        <h1 class="text-center shadow-md text-gray-600 text-4xl sm:text-5xl font-extrabold py-6 mb-2 font-raleway">Results Portfolios</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10 my-16">
+            {% for category in categories %}
+
+                <a href="{% url 'vote_app:result' category.slug %}" 
+                    class=" bg-gray-50 text-black hover:text-white p-10 text-center border border-gray-50 text-3xl font-bold shadow-xl hover:bg-gray-900 transition delay-100 duration-100 ease-linear" 
+                    data-aos="fade-right" 
+                    data-aos-delay="100" 
+                    data-aos-duration="500">
+                    {{ category.name }}
+                </a>
+
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

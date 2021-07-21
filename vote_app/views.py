@@ -19,7 +19,7 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
 
 class VotingCategoriesListPage(CustomLoginRequiredMixin, TemplateView):
     """view for displaying the various categories to vote in"""
-    template_name = "vote/voting-categories-list.html"
+    template_name = "vote/new-voting-categories-list.html"
     model = Category
     context_object_name = "categories"
     login_url = reverse_lazy("users:login")
@@ -39,13 +39,13 @@ class VotingCategoriesListPage(CustomLoginRequiredMixin, TemplateView):
                 user = get_user_model().objects.get(username=voter.username)
                 user.voted = True
                 user.save()
-                return render(request, template_name="vote/voting-completed.html")
-        return render(request, "vote/vote-page-disabled.html")
+                return render(request, template_name="vote/new-voting-completed.html")
+        return render(request, "vote/new-vote-page-disabled.html")
 
 
 class VotingPage(CustomLoginRequiredMixin, TemplateView):
     """view for the voting page"""
-    template_name = "vote/vote-page.html"
+    template_name = "vote/new-vote-page.html"
     success_url = reverse_lazy("vote_app:vote-categories")
 
     CandidateInlineFormset = inlineformset_factory(Category,
@@ -92,18 +92,18 @@ class VotingPage(CustomLoginRequiredMixin, TemplateView):
             # Check if the user has voted in the category already and redirect him if he has
             user = request.user
             if user.username in [voter.username for voter in category.voters.filter(username__search=user.username)]:
-                return render(request, template_name="vote/already-voted.html", context={"user": user})
+                return render(request, template_name="vote/new-already-voted.html", context={"user": user})
 
             formset = self.CandidateInlineFormset(instance=category)
             context = {"category": category, "formset": formset}
             return render(request, self.template_name, context)
-        return render(request, "vote/vote-page-disabled.html")
+        return render(request, "vote/new-vote-page-disabled.html")
 
 
 # Election Results
 class AllCategoriesResultsPageView(TemplateView):
     """view for the results"""
-    template_name = "vote/results-all-categories-display.html"
+    template_name = "vote/new-results-all-categories-display.html"
     model = Category
     
     def get(self, request, **kwargs):
@@ -113,11 +113,11 @@ class AllCategoriesResultsPageView(TemplateView):
                 "categories": self.model.objects.all()
             }
             return render(request, self.template_name, context)
-        return render(request, "vote/results-page-disabled.html")
+        return render(request, "vote/new-results-page-disabled.html")
 
 
 class ResultPageView(DetailView):
     """view for the result of an individual portfolio"""
-    template_name = "vote/result-page.html"
+    template_name = "vote/new-result-page.html"
     model = Category
     context_object_name = "category"

@@ -1,0 +1,14 @@
+{% extends 'new-base.html' %}
+
+{% block title %}Already Voted{% endblock title %}
+
+
+{% block content %}
+    <div class="alert-box-1" data-aos="zoom-in-up" data-aos-delay="200" data-aos-duration="2000">
+        <h1 class="alert-box-1-main-text">You have already voted in this category, please vote in the others</h1>
+
+       <div class="flex justify-center mt-6">
+            <a href="{% url 'vote_app:vote-categories' %}" class="alert-box-1-btn">Continue Voting</a>
+        </div>
+    </div>
+{% endblock content %}

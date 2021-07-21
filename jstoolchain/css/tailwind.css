@@ -25,3 +25,19 @@
         transition delay-75 duration-100 ease-in-out
         focus:bg-gray-900 focus:text-white;
 }
+
+.alert-box-1 {
+    @apply bg-gray-50 shadow-xl w-full py-10 my-32 md:my-32;
+}
+
+.alert-box-1-main-text {
+    @apply text-4xl md:text-5xl px-2 font-bold text-center text-blue-800;
+}
+
+.alert-box-1-other-text {
+    @apply text-2xl  text-center text-gray-900 py-10 px-2 font-semibold;
+}
+
+.alert-box-1-btn {
+    @apply px-4 py-4 bg-green-700 text-xl text-white font-bold;
+}
