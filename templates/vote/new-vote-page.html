@@ -43,7 +43,7 @@
                             <div class="shadow-md p-5 bg-gray-900" data-aos="flip-left" data-aos-delay="50" data-aos-duration="200"> <!-- showcase the info on the candidate that the voter should see -->
                                 <!-- render the name of the candidate from the form-->
                                 <h1 class="text-2xl text-center text-gray-100 py-4 font-bold">
-                                    {{ form.instance.full_name }} - <span class="text-green-500">80%</span> <!-- TODO - render the  -->
+                                    {{ form.instance.full_name }} - <span class="text-green-500">{{ form.instance.vetting_score }}%</span>
                                 </h1> 
 
                                 <!-- render the picture of the candidate from the form-->
