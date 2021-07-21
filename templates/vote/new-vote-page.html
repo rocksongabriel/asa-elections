@@ -11,14 +11,15 @@
 
         <div class="mx-2 md:mx-5 lg:mx-10 my-5 md:my-10">
 
-            <!--
-                display:
-                    - the candidate name
-                    - the candidate picture
-                    - a vote button beneath each candidate
-                    - a hidden field for the upvote, that will be ticked when the vote button is clicked
-            -->
+            <!-- Button to clear votes -->
+            <button 
+                type="button" 
+                class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 font-bold text-xl" 
+                id="clearVoteBtn">
+                Clear Vote
+            </button>
 
+            <!-- The form -->
             <form method="POST" enctype=multipart/form-data id="vote-form">
                 {% csrf_token %}
 

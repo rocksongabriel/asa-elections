@@ -65,7 +65,7 @@
     </div>
   </nav>
   <!-- Mobile Navigation -->
-  <div class="bg-white shadow-xl lg:hidden hidden" id="mobile-nav">
+  <div class="bg-white shadow-xl lg:hidden hidden font-bold font-raleway" id="mobile-nav">
     <div class="flex flex-col">
       {% if user.is_authenticated %}
         <a href="{% url 'users:logout' %}" class="mobile-nav-link">logout {{ user.username }} !!!</a>
