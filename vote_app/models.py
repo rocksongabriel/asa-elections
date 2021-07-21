@@ -60,6 +60,11 @@ class Candidate(models.Model):
         null=False,
         blank=False,
         help_text="Select the category the candidate belongs to")
+    vetting_score = models.PositiveIntegerField(
+        _("Vetting Score"), 
+        default=0, 
+        help_text="Enter the score the candidate had at vetting, please don't include the percentage sign"
+    )
     number_of_votes = models.PositiveIntegerField(_("Number of Votes"),
                                                   default=0)
 
@@ -88,6 +93,7 @@ class Candidate(models.Model):
         return self.full_name
 
     class Meta:
+        ordering = ["-vetting_score"]
         verbose_name = "Candidate"
         verbose_name_plural = "Candidates"
 
