@@ -5,7 +5,7 @@ from .models import User
 class UserAdmin(admin.ModelAdmin):
     search_fields = ("username", "email",)
     list_filter = ("voted",)
-    list_display = ("username", "first_name", "last_name", "email", "voted",)
+    list_display = ("username", "first_name", "last_name", "campus", "email", "voted",)
     readonly_fields = ("password", "voted",)
 
 
