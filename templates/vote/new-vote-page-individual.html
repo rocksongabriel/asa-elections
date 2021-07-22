@@ -1,0 +1,110 @@
+{% extends 'new-base.html' %}
+{% load static %}
+
+{% block title %}Vote for your favorite {{ category.name }}{% endblock title %}
+
+
+{% block content %}
+    <div id="vote-app" class="my-16 md:my-20 font-raleway">
+
+        <h1 class="text-center shadow-md text-gray-600 text-4xl sm:text-5xl font-extrabold py-6 mb-2 ">{{ category.name }}</h1>
+
+        <div class="mx-2 md:mx-5 lg:mx-10 my-5 md:my-10">
+
+            <!-- Button to clear votes -->
+            <button 
+                type="button" 
+                class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 font-bold text-xl" 
+                id="clearVoteBtn">
+                Clear Vote
+            </button>
+
+            <!-- The form -->
+            <form method="POST" enctype=multipart/form-data id="vote-form">
+                {% csrf_token %}
+
+                {{ formset.management_form }}
+
+                {% for error in errors %}
+                    {{ error }}
+                {% endfor %}
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5">
+
+                    {% for form in formset %}
+                            <div class="hidden"> <!-- ender the form with it's corresponding values -->
+                                {{ form.id }}
+                                {{ form.full_name }}
+                                {{ form.picture }}
+                                {{ form.category }}
+                                {{ form.number_of_votes }}
+                            </div>
+
+                            <div class="shadow-md p-5 bg-gray-900" data-aos="flip-left" data-aos-delay="50" data-aos-duration="200"> <!-- showcase the info on the candidate that the voter should see -->
+                                <!-- render the name of the candidate from the form-->
+                                <h1 class="text-2xl text-center text-gray-100 py-4 font-bold">
+                                    {{ form.instance.full_name }} - <span class="text-green-500">{{ form.instance.vetting_score }}%</span>
+                                </h1> 
+
+                                <!-- render the picture of the candidate from the form-->
+                                <div class="relative">
+                                    <img src="{{form.instance.picture.url}}"" class="w-full h-80">
+                                    <h3 
+                                        class="bg-gray-800 py-3 w-full text-center text-green-500 absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 text-5xl font-extrabold hidden voted-label checkbox_{{ form.instance.full_name|slugify }} transition delay-100 duration-100">
+                                        <i class="fas" id="votedIcon"></i> Voted
+                                    </h3>
+                                </div>
+
+                                <!-- button to upvote this candidate -->
+                                <div class="mt-5">
+                                    <input class="checkbox_{{ form.instance.full_name|slugify }} input-checkbox hidden" type="checkbox" name="upvote_{{ form.instance.full_name|slugify }}" id="upvote_{{ form.instance.full_name|slugify }}">
+                                    <input class="checkbox_{{ form.instance.full_name|slugify }} input-checkbox hidden" type="checkbox" name="downvote_{{ form.instance.full_name|slugify }}" id="downvote_{{ form.instance.full_name|slugify }}">
+
+
+                                    <div class="flex space-x-2">
+                                        <button 
+                                            type="button" 
+                                            style="width: 50%" 
+                                            class="checkbox-btn focus:outline-none transition delay-100 duration-100"
+                                            id="upVoteBtn"
+                                        >
+                                            <label 
+                                                for="upvote_{{ form.instance.full_name|slugify }}"
+                                                class="block text-center bg-blue-600 hover:bg-blue-700 p-3 text-white font-bold text-xl cursor-pointer checkbox-label">
+                                                Yes <i class="fas fa-caret-up"></i>
+                                            </label>
+                                        </button>
+                                        <button 
+                                            type="button" 
+                                            style="width: 50%" 
+                                            class="checkbox-btn focus:outline-none transition delay-100 duration-100" 
+                                            id="downVoteBtn"
+                                        >
+                                            <label 
+                                                for="downvote_{{ form.instance.full_name|slugify }}"
+                                                class="block text-center bg-red-600 hover:bg-red-700 p-3 text-white font-bold text-xl cursor-pointer checkbox-label">
+                                                No <i class="fas fa-caret-down"></i>
+                                            </label>
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                    {% endfor %}
+                </div>
+
+            <div class="flex mt-10">
+                <button 
+                    class="bg-green-600 py-3 px-8 w-full text-2xl font-bold text-white hover:bg-green-700 focus:outline-none"
+                    id="submitBtn"
+                > 
+                    <div class="hidden" id="spinner"><i class="fas fa-spinner animate-spin"></i></div> </i> Submit Vote <i class="fas fa-inbox ml-3" ></i>
+                </button>
+            </div>
+            </form>
+
+        </div>
+    </div>
+{% endblock content %}
+
+{% block extra_js %}<script src="{% static 'js/custom/vote.js' %}"></script>{% endblock %}
