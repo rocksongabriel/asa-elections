@@ -45,7 +45,7 @@ class Category(models.Model):
 
     def save(self, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            self.slug = slugify(f"{self.name}-{self.get_campus_display()}")
         return super().save(**kwargs)
 
     class Meta:
