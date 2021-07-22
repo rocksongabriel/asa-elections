@@ -67,7 +67,7 @@ class Candidate(models.Model):
     )
     number_of_votes = models.PositiveIntegerField(_("Number of Votes"),
                                                   default=0)
-    yes = models.PositiveBigIntegerField(_("Number of Yes",), default=0)
+    yes = models.PositiveBigIntegerField(_("Number of Yeses",), default=0)
     no = models.PositiveIntegerField(_("Number of Nos"), default=0)
 
     # display picture in admin
@@ -84,6 +84,16 @@ class Candidate(models.Model):
     # increase vote of candidate
     def upvote(self, **kwargs):
         self.number_of_votes += 1
+        return super().save(**kwargs)
+
+    # increase the yeses
+    def yes_vote(self, **kwargs):
+        self.yes += 1
+        return super().save(**kwargs)
+
+    # increase the nos
+    def no_vote(self, **kwargs):
+        self.no += 1
         return super().save(**kwargs)
 
     def save(self, **kwargs):
