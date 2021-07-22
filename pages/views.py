@@ -1,3 +1,4 @@
+from vote_app.models import Category
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 from vote_app.forms import SupportForm
@@ -35,7 +36,8 @@ class HomePage(TemplateView):
 
     def get(self, request, **kwargs):
         context = {
-            "form": self.form_class()
+            "form": self.form_class(),
+            "categories": Category.objects.all()
         }
         return render(request, self.template_name, context)
 
