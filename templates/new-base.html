@@ -52,7 +52,7 @@
             <a href="{% url 'users:logout' %}" class="nav-link">logout {{ user.username }} !!!</a>
           {% else %}
             <a href="{% url 'users:login' %}" class="nav-link">login</a>
-            <a href="#" class="nav-link">request password</a>
+            <a href="#" class="nav-link">contact support</a>
           {% endif %}
         </div>
       </div>
@@ -80,7 +80,7 @@
         <a href="{% url 'users:logout' %}" class="mobile-nav-link">logout {{ user.username }} !!!</a>
       {% else %}
         <a href="{% url 'users:login' %}" class="mobile-nav-link">login</a>
-        <a href="#" class="mobile-nav-link">request password</a>
+        <a href="#" class="mobile-nav-link">contact support</a>
       {% endif %}
       <a href="{% url 'pages:ec-board-page' %}" class="mobile-nav-link">electoral board members</a>
       <a href="{% url 'vote_app:results' %}" class="mobile-nav-link">election results</a>

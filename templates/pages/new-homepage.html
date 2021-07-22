@@ -27,9 +27,9 @@
         <!-- Votes Cast So Far -->
         <div class="mt-10 md:mt-16 lg:mt-20">
             <h1 
-                class="pt-24 pb-5 text-center font-bold text-gray-500 text-3xl md:text-4xl border-b-4 border-gray-200 shadow-xl md:mb-5"
+                class="pt-24 pb-5 text-center font-bold text-pink-600 text-3xl md:text-4xl border-b-4 border-gray-200 shadow-xl md:mb-5"
                 data-aos="fade-in-down" data-aos-duration="1000"
-            >Votes Casted So Far</h1>
+            >Votes Casted So Far In Each Category</h1>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 font-raleway">
 
@@ -43,6 +43,141 @@
             </div>
         </div>
 
+        <!-- Container for the Information on the Voting and the form for suppport-->
+        <div class="mt-10 md:mt-16 lg:mt-20 grid grid-cols-1 lg:grid-cols-2 gap-10 space-y-10 lg:space-y-0 mb-20">
+
+            <!-- The Voting Information -->
+            <div class="text-left" data-aos="fade-right" data-aos-duration="1000">
+                <h2 class="text-pink-600 text-3xl text-center font-bold py-5 border-b-2 border-gray-800 shadow-md pb-3">Information on Voting</h2>
+                <div>
+                    <h3 class="text-pink-500 text-2xl text-center font-bold py-2">How Do I Vote?</h3>
+                    <ul class="list-disc text-lg font-raleway text-gray-900 space-y-2">
+
+                        <li class="mt-3">
+                            Make sure you have your credentials - your <span class="font-bold text-pink-600">Student ID</span> and <span class="font-bold text-pink-600">Password</span>. This has been emailed to your student email address.
+                        </li>
+            
+                        <li>
+                            Click on the <span class="text-pink-600 font-bold">Login</span> button on top of the page, or click on the <span class="text-pink-600 font-bold">Cast a Vote</span> button above.
+                        </li>
+
+                        <li>
+                            On the login page, enter your credentials into the appropriate boxes.
+                        </li>
+            
+                        <li>
+                            After you are logged in successfully, you would be taken to the categories page. Click on each category present and cast your vote for your favorite candidate.
+                        </li>
+            
+                        <li>
+                            Do this for all categories till you come to a successful end of the voting process.
+                        </li>
+
+                        <p class="py-3 text-green-500 font-bold">Good Luck, May the best candidate win</p>
+                    </ul>
+
+                    <h3 class="text-pink-400 text-2xl text-center font-bold py-2 lg:mt-10">How do I see the results of other campus?</h3>
+                    <ul class="list-disc text-lg font-raleway text-gray-900 space-y-2">
+                        <li>
+                            Click on the logout on menu on top of the page.
+                        </li>
+                        <li>
+                            After successful logout, go to the results page, and you can now have access results of other campus.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- The Support form -->
+            <div data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="text-pink-600 text-3xl text-center font-bold py-5 border-b-2 border-gray-800 shadow-md pb-3">Contact Support</h2>
+                
+                <form action="" method="post">
+                    {% csrf_token %}
+
+                    <div class="flex flex-col my-2">
+                        <label 
+                            for="{{ form.full_name.id_for_label }}" 
+                            class="text-lg font-bold text-gray-700"
+                        >
+                            {{ form.full_name.label }}
+                        </label>
+                        <input 
+                            type="text" 
+                            name="{{ form.full_name.name }}" 
+                            id="{{ form.full_name.id_for_label }}" 
+                            maxlength="{{ form.full_name.max_length }}"
+                            {% if form.full_name.field.required %}required{% endif %}
+                            class="border-2 border-purple-600 focus:outline-none px-3 py-2 text-lg"
+                        >
+                        <small class="text-blue-600 font-bold">{{ form.full_name.help_text }}</small>
+                    </div>
+        
+                    <div class="flex flex-col my-2">
+                        <label 
+                            for="{{ form.student_id.id_for_label }}" 
+                            class="text-lg font-bold text-gray-700"
+                        >
+                            {{ form.student_id.label }}
+                        </label>
+                        <input 
+                            type="text" 
+                            name="{{ form.student_id.name }}" 
+                            id="{{ form.student_id.id_for_label }}"
+                            maxlength="{{ form.student_id.max_length }}" 
+                            {% if form.student_id.field.required %}required{% endif %}
+                            class="border-2 border-purple-600 focus:outline-none px-3 py-2 text-lg"
+                        >
+                        <small class="text-blue-600 font-bold">{{ form.student_id.help_text }}</small>
+                    </div>
+        
+                    <div class="flex flex-col my-2">
+                        <label 
+                            for="{{ form.email_address.id_for_label }}" 
+                            class="text-lg font-bold text-gray-700"
+                        >
+                            {{ form.email_address.label }}
+                        </label>
+                        <input 
+                            type="text" 
+                            name="{{ form.email_address.name }}" 
+                            id="{{ form.email_address.id_for_label }}"
+                            maxlength="{{ form.email_address.max_length }}" 
+                            {% if form.email_address.field.required %}required{% endif %}
+                            class="border-2 border-purple-600 focus:outline-none px-3 py-2 text-lg"
+                        >
+                        <small class="text-blue-600 font-bold">{{ form.email_address.help_text }}</small>
+                    </div>
+        
+                    <div class="flex flex-col my-2">
+                        <label 
+                            for="{{ form.message.id_for_label }}" 
+                            class="text-lg font-bold text-gray-700"
+                        >
+                            {{ form.message.label }}
+                        </label>
+                        <textarea 
+                            name="{{ form.message.name }}" 
+                            id="{{ form.message.id_for_label }}" 
+                            maxlength="{{ form.message.max_length }}"
+                            {% if form.message.field.required %}required{% endif %}
+                            cols="30" 
+                            rows="4"
+                            class="border-2 border-purple-600 focus:outline-none px-3 py-2 text-lg"
+                        ></textarea>
+                        <small class="text-blue-600 font-bold">{{ form.message.help_text }}</small>
+                    </div>
+
+                    <button 
+                        type="submit" 
+                        class="w-full py-2 mt-4 bg-blue-600 hover:bg-blue-700 text-lg font-bold text-white"
+                    >
+                        Submit Complaint
+                    </button>
+                </form>
+
+            </div>
+        </div>
     </div>
 
 {% endblock content %}
