@@ -14,7 +14,8 @@ class CandidateInline(admin.TabularInline):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     inlines = [CandidateInline, ]
-    list_display = ["name",]
+    list_display = ["name", "campus"]
+    list_filter = ["campus"]
     readonly_fields = ("slug", "voters")
 
 
