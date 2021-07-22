@@ -11,6 +11,18 @@ User = settings.AUTH_USER_MODEL
 
 class Category(models.Model):
     """Model to represent the categories the candidates are in"""
+
+    MAIN_CAMPUS = "MC"
+    CITY_CAMPUS = "CC"
+
+    CAMPUS = (
+        (MAIN_CAMPUS, "Main Campus",),
+        (CITY_CAMPUS, "City Campus",),
+    )
+
+    campus = models.CharField(_("Campus"), choices=CAMPUS, default=MAIN_CAMPUS, max_length=20,
+                              help_text="Select the campus the student is on", null=False, blank=False)
+
     name = models.CharField(_("Name of Category"),
                             max_length=50,
                             blank=False,
