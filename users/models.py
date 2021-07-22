@@ -73,7 +73,7 @@ class UserCredential(models.Model):
     def save(self, **kwargs):
         get_user_model().objects.create_user_account_and_send_mail(
             student_id=self.student_id, 
-            email=self.email, 
+            email=self.email.split("//")[1], 
             campus=self.campus
         )
         return super().save(**kwargs)
