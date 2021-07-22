@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import ElectoralCommisionMember
+
+
+@admin.register(ElectoralCommisionMember)
+class ElectoralCommisionMemberAdmin(admin.ModelAdmin):
+    list_display = ["name", "image_tag"]
