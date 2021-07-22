@@ -30,7 +30,8 @@ class VotingCategoriesListPage(CustomLoginRequiredMixin, TemplateView):
         if control_panel.enable_voting_page:
             voter = request.user
             context = {
-                "categories": self.model.objects.all().exclude(voters=voter), # remove the categories the voter has already voted in
+                # fetch categories only of the user
+                "categories": self.model.objects.filter(campus=voter.campus).exclude(voters=voter), # remove the categories the voter has already voted in
                 "user": request.user
             }
             if context["categories"].count() > 0:
@@ -107,10 +108,10 @@ class VotingPage(CustomLoginRequiredMixin, TemplateView):
     def get(self, request, slug):
         control_panel = PageControlPanel.objects.first()
         if control_panel.enable_voting_page:
-            category = Category.objects.get(slug=slug)
-            
-            # Check if the user has voted in the category already and redirect him if he has
             user = request.user
+            category = Category.objects.get(slug=slug)
+
+            # Check if the user has voted in the category already and redirect him if he has
             if user.username in [voter.username for voter in category.voters.filter(username__search=user.username)]:
                 return render(request, template_name="vote/new-already-voted.html", context={"user": user})
 
@@ -129,10 +130,11 @@ class AllCategoriesResultsPageView(TemplateView):
     model = Category
     
     def get(self, request, **kwargs):
+        voter=request.user
         control_panel = PageControlPanel.objects.first()
         if control_panel.enable_results_page:
             context = {
-                "categories": self.model.objects.all()
+                "categories": self.model.objects.filter(campus=voter.campus)
             }
             return render(request, self.template_name, context)
         return render(request, "vote/new-results-page-disabled.html")
