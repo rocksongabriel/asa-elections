@@ -51,3 +51,33 @@ class User(AbstractUser):
         return self.username
 
 
+class UserCredential(models.Model):
+    """Model to create a user credential and email the credentials"""
+
+    MAIN_CAMPUS = "MC"
+    CITY_CAMPUS = "CC"
+
+    CAMPUS = (
+        (MAIN_CAMPUS, "Main Campus",),
+        (CITY_CAMPUS, "City Campus",),
+    )
+
+    student_id = models.CharField(_("Student ID"), null=False, blank=False, max_length=20, help_text="Enter the Student ID of the student")
+    email = models.URLField(_("Email of Student"), null=False, blank=False, max_length=300, help_text="Enter the email address of the student")
+    campus = models.CharField(_("Campus"), choices=CAMPUS, default=MAIN_CAMPUS, max_length=20,
+                              help_text="Select the campus the student is on", null=False, blank=False)
+    
+    def __str__(self):
+        return self.student_id
+
+    def save(self, **kwargs):
+        get_user_model().objects.create_user_account_and_send_mail(
+            student_id=self.student_id, 
+            email=self.email, 
+            campus=self.campus
+        )
+        return super().save(**kwargs)
+
+    class Meta:
+        verbose_name = "User Credential"
+        verbose_name_plural = "User Credentials"
