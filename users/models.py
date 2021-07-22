@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth import get_user, get_user_model
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 
 
 # Custom User Manager
@@ -63,17 +64,26 @@ class UserCredential(models.Model):
     )
 
     student_id = models.CharField(_("Student ID"), null=False, blank=False, max_length=20, help_text="Enter the Student ID of the student")
-    email = models.URLField(_("Email of Student"), null=False, blank=False, max_length=300, help_text="Enter the email address of the student")
+    email = models.CharField(_("Email of Student"), null=False, blank=False, max_length=300, help_text="Enter the email address of the student")
     campus = models.CharField(_("Campus"), choices=CAMPUS, default=MAIN_CAMPUS, max_length=20,
                               help_text="Select the campus the student is on", null=False, blank=False)
     
     def __str__(self):
         return self.student_id
 
+    def clean(self):
+        try:
+            user = get_user_model().objects.get(username=self.student_id)
+            if user:
+                raise ValidationError("A user with this student ID already exists")
+        except ObjectDoesNotExist:
+            pass
+        return super().clean()
+
     def save(self, **kwargs):
         get_user_model().objects.create_user_account_and_send_mail(
             student_id=self.student_id, 
-            email=self.email.split("//")[1], 
+            email=self.email, 
             campus=self.campus
         )
         return super().save(**kwargs)

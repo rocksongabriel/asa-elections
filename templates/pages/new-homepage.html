@@ -1,12 +1,53 @@
 {% extends 'new-base.html' %}
+{% load static %}
 
 {% block title %}Homepage of ASAElections{% endblock %}
 
 
 {% block content %}
 
-    <div>
-        <h1 class="text-center text-5xl md:text-6xl lg:text-8xl text-gray-800">Homepage</h1>
+    <!-- container for the content -->
+    <div class="my-16 md:my-20 px-10 md:px-10 lg:px-16">
+
+        <!-- container for the header section -->
+        <div class="flex justify-around">
+
+            <!-- The header text and call to action -->
+            <div class="">
+                <h1 class="text-5xl md:text-8xl font-extrabold font-serif text-center text-gray-800">Accounting Students Association</h1>
+                <h3 class="font-bold text-center text-4xl md:text-5xl py-10 text-gray-700 font-raleway">Online Voting Platform</h3>
+                <div class="mt-5 text-center space-x-2 md:space-x-3 lg:space-x-4">
+                    <a href="#" class="px-8 md:px-12 lg:px-16 py-3 bg-blue-700 border-2 border-blue-600 font-bold hover:bg-blue-700">Vote</a>
+                    <a href="#" class="px-8 md:px-12 lg:px-16 py-3 border-2 border-gray-800 hover:bg-red-600 font-bold transition delay-75 duration-100">Results</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Votes Cast So Far -->
+        <div>
+            <h1 class="pt-24 pb-5 text-center font-bold text-gray-500 text-3xl md:text-4xl border-b-4 border-gray-200 shadow-xl">Votes Casted So Far</h1>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 font-raleway">
+                <div class="text-center my-5 md:my-10 lg:my-16">
+                    <h2 class="text-gray-800 font-semibold text-3xl">Category One</h2>
+                    <p class="font-serif text-3xl font-bold">25</p>
+                </div>
+                <div class="text-center my-5 md:my-10 lg:my-16">
+                    <h2 class="text-gray-800 font-semibold text-3xl">Category Two</h2>
+                    <p class="font-serif text-3xl font-bold">84</p>
+                </div>
+                <div class="text-center my-5 md:my-10 lg:my-16">
+                    <h2 class="text-gray-800 font-semibold text-3xl">Category Three</h2>
+                    <p class="font-serif text-3xl font-bold">43</p>
+                </div>
+                <div class="text-center my-5 md:my-10 lg:my-16">
+                    <h2 class="text-gray-800 font-semibold text-3xl">Category Four</h2>
+                    <p class="font-serif text-3xl font-bold">49</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 {% endblock content %}
