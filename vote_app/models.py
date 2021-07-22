@@ -67,6 +67,8 @@ class Candidate(models.Model):
     )
     number_of_votes = models.PositiveIntegerField(_("Number of Votes"),
                                                   default=0)
+    yes = models.PositiveBigIntegerField(_("Number of Yes",), default=0)
+    no = models.PositiveIntegerField(_("Number of Nos"), default=0)
 
     # display picture in admin
     def image_tag(self):
