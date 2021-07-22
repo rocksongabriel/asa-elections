@@ -16,7 +16,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class CustomLoginRequiredMixin(LoginRequiredMixin):
     login_url = reverse_lazy("users:login")
 
-
+# TEST PROJECT
 class VotingCategoriesListPage(CustomLoginRequiredMixin, TemplateView):
     """view for displaying the various categories to vote in"""
     template_name = "vote/new-voting-categories-list.html"
