@@ -1,3 +1,4 @@
+from users.models import UserCredential
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 
@@ -13,3 +14,10 @@ class UserAdmin(admin.ModelAdmin):
 
 
 admin.site.register(User, UserAdmin)
+
+
+@admin.register(UserCredential)
+class UserCredentialAdmin(admin.ModelAdmin):
+    list_display = ["student_id", "email", "campus"]
+    search_fields = ["student_id", "email"]
+    list_filter = ["campus"]
