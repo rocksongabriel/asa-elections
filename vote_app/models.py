@@ -60,7 +60,7 @@ class Candidate(models.Model):
         null=False,
         blank=False,
         help_text="Select the category the candidate belongs to")
-    vetting_score = models.PositiveIntegerField(
+    vetting_score = models.FloatField(
         _("Vetting Score"), 
         default=0, 
         help_text="Enter the score the candidate had at vetting, please don't include the percentage sign"
