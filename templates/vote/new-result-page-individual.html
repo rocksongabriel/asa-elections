@@ -1,0 +1,44 @@
+{% extends 'new-base.html' %}
+
+{% block title %}Results of {{ category.name }} portfolio {% endblock %}
+
+
+{% block content %}
+
+<div class="my-16 md:my-20 mx-5 md:mx-10 lg:mx-16  font-raleway">
+    <h1 class="text-center shadow-md text-gray-600 text-4xl sm:text-5xl font-extrabold py-6 mb-2 font-raleway">{{ category.name }}</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-20">
+
+        {% for candidate in category.candidates.all %}
+
+            <div class="shadow-md p-5 bg-gray-900" data-aos="flip-right" data-aos-delay="50" data-aos-duration="200"> 
+                <!-- render the name of the candidate -->
+                <h1 class="text-2xl text-center text-gray-100 py-4 font-bold">
+                    {{ candidate.full_name }} - <span class="text-green-500">{{ candidate.vetting_score }}%</span>
+                </h1> 
+
+                <!-- render the picture of the candidate from the form-->
+                <div class="">
+                    <img src="{{ candidate.picture.url }}" class="w-full h-80">
+                </div>
+
+                <div class="flex">
+                    <div class="my-2 font-raleway w-1/2"> <!-- display number of votes-->
+                        <h1 class="text-4xl text-center text-gray-100 py-4 font-bold">
+                            Yes - <span class="text-green-700 font-extrabold">{{ candidate.yes }}</span>
+                        </h1>
+                    </div>
+                    <div class="my-2 font-raleway w-1/2"> <!-- display number of votes-->
+                        <h1 class="text-4xl text-center text-gray-100 py-4 font-bold">
+                            No - <span class="text-red-600 font-extrabold">{{ candidate.no }}</span>
+                        </h1>
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
