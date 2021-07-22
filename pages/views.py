@@ -1,11 +1,12 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from vote_app.forms import SupportForm
 from django.core.mail import send_mail
 from django.conf import settings
-from django.template.loader import get_template, render_to_string
+from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
+from .models import ElectoralCommisionMember
 
 class HomePage(TemplateView):
     template_name = "pages/new-homepage.html"
@@ -52,3 +53,9 @@ class HomePage(TemplateView):
             return render(request, template_name="pages/new-complain-submitted.html")
         return render(request, self.template_name, {"form": form})
 
+
+class ElectoralCommissionBoardPage(ListView):
+    """Page to list the members of the Electoral Commission Members"""
+    model = ElectoralCommisionMember
+    template = "pages/electoral-board-page.html"
+    context_object_name = "ec-board-members"
