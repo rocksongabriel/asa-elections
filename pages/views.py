@@ -57,5 +57,5 @@ class HomePage(TemplateView):
 class ElectoralCommissionBoardPage(ListView):
     """Page to list the members of the Electoral Commission Members"""
     model = ElectoralCommisionMember
-    template = "pages/electoral-board-page.html"
-    context_object_name = "ec-board-members"
+    template_name = "pages/new-electoral-board-page.html"
+    context_object_name = "ec_board_members"
