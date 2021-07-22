@@ -16,7 +16,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class CustomLoginRequiredMixin(LoginRequiredMixin):
     login_url = reverse_lazy("users:login")
 
-# TEST PROJECT
+
 class VotingCategoriesListPage(CustomLoginRequiredMixin, TemplateView):
     """view for displaying the various categories to vote in"""
     template_name = "vote/new-voting-categories-list.html"
@@ -26,6 +26,7 @@ class VotingCategoriesListPage(CustomLoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         control_panel = PageControlPanel.objects.first()
+        
         if control_panel.enable_voting_page:
             voter = request.user
             context = {
@@ -34,6 +35,7 @@ class VotingCategoriesListPage(CustomLoginRequiredMixin, TemplateView):
             }
             if context["categories"].count() > 0:
                 return render(request, self.template_name, context)
+                
             else:
                 # Mark the user as voted
                 user = get_user_model().objects.get(username=voter.username)
@@ -63,15 +65,33 @@ class VotingPage(CustomLoginRequiredMixin, TemplateView):
                                               request.FILES,
                                               instance=category)
 
-        # Get the upvote key
-        for key in request.POST.keys():
-            if 'upvote' in key:
-                # Get the full name from the key
-                full_name = " ".join([name.capitalize() for name in key.split("_")[1].split("-")])
-        # Get the candidate using the full name
-        candidate = Candidate.objects.get(full_name=full_name)
-        # Upvote the candidate 
-        candidate.upvote()
+        # Vote Yes / No when it is only one candidate
+        if category.candidates.count() == 1:
+            for key in request.POST.keys():
+                if 'upvote' in key:
+                    # Get the full name from the key
+                    full_name = " ".join([name.capitalize() for name in key.split("_")[1].split("-")])
+                    # Get the candidate's full name
+                    candidate = Candidate.objects.get(full_name=full_name)
+                    # Increase the yes count of the candidate
+                    candidate.yes_vote()
+                elif 'downvote' in key:
+                    # Get the full name from the key
+                    full_name = " ".join([name.capitalize() for name in key.split("_")[1].split("-")])
+                    # Get the candidate's full name
+                    candidate = Candidate.objects.get(full_name=full_name)
+                    # Increase the no count of the candidate
+                    candidate.no_vote()
+        else: # Increase number of votes
+            # Get the upvote key if we are working with multiple candidates
+            for key in request.POST.keys():
+                if 'upvote' in key:
+                    # Get the full name from the key
+                    full_name = " ".join([name.capitalize() for name in key.split("_")[1].split("-")])
+                    # Get the candidate using the full name
+                    candidate = Candidate.objects.get(full_name=full_name)
+                    # Upvote the candidate 
+                    candidate.upvote()
 
         # Get the user and add him to the voters of the category
         voter = request.user
@@ -96,6 +116,8 @@ class VotingPage(CustomLoginRequiredMixin, TemplateView):
 
             formset = self.CandidateInlineFormset(instance=category)
             context = {"category": category, "formset": formset}
+            if context["category"].candidates.count() == 1:
+                return render(request, "vote/new-vote-page-individual.html", context)
             return render(request, self.template_name, context)
         return render(request, "vote/new-vote-page-disabled.html")
 
