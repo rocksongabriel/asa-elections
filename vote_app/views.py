@@ -133,10 +133,18 @@ class AllCategoriesResultsPageView(TemplateView):
         voter=request.user
         control_panel = PageControlPanel.objects.first()
         if control_panel.enable_results_page:
-            context = {
-                "categories": self.model.objects.filter(campus=voter.campus)
-            }
-            return render(request, self.template_name, context)
+
+            # handle the anonymous user issue
+            try:
+                context = {
+                    "categories": self.model.objects.filter(campus=voter.campus)
+                }
+                return render(request, self.template_name, context)
+            except AttributeError:
+                context = {
+                    "categories": self.model.objects.all()
+                }
+                return render(request, self.template_name, context)
         return render(request, "vote/new-results-page-disabled.html")
 
 
