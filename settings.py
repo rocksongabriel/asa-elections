@@ -85,8 +85,9 @@ LOGOUT_REDIRECT_URL = reverse_lazy("pages:home")
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_HOST_USER = 'ec.unigapselection21@gmail.com'
-    EMAIL_HOST_PASSWORD = 'y2QwPi!3r'
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = 'ec.asaelections2021@gmail.com'
+    EMAIL_HOST_PASSWORD = 'mbJKKR5kDmzguKs'
     EMAIL_USE_TLS = True
     EMAIL_USE_SSL = False
 
@@ -94,10 +95,10 @@ if not DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_PORT = 587
-    EMAIL_HOST_USER = 'ec.unigapselection21@gmail.com'
-    EMAIL_HOST_PASSWORD = 'y2QwPi!3r'
+    EMAIL_HOST_USER = 'ec.asaelections2021@gmail.com'
+    EMAIL_HOST_PASSWORD = 'mbJKKR5kDmzguKs'
     EMAIL_USE_TLS = True
     EMAIL_USE_SSL = False
 
-DEFAULT_FROM_EMAIL = 'ec.unigapselection21@gmail.com'
-SERVER_EMAIL = 'ec.unigapselection21@gmail.com'
+DEFAULT_FROM_EMAIL = 'ec.asaelections2021@gmail.com'
+SERVER_EMAIL = 'ec.asaelections2021@gmail.com'
