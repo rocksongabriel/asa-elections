@@ -1,19 +1,15 @@
-from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.core.mail import send_mail
 import csv
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
-import os
-from django.contrib.auth import get_user, get_user_model
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 
 # Custom User Manager
 class CustomUserManager(UserManager):
     """Custom user manager for the user model"""
+
     def auto_create_users(self, csv_file):
         """Create users from a csv file, using the student ID column as the the username, auto generate password for the account and email the credentials to the email associated with the student ID"""
 
@@ -46,11 +42,19 @@ class CustomUserManager(UserManager):
 class User(AbstractUser):
     """Model to represent a user"""
 
+    MAIN_CAMPUS = "MC"
+    CITY_CAMPUS = "CC"
+
+    CAMPUS = (
+        (MAIN_CAMPUS, "Main Campus",),
+        (CITY_CAMPUS, "City Campus",),
+    )
+
+    campus = models.CharField(_("Campus"), choices=CAMPUS, default=MAIN_CAMPUS, max_length=20,
+                              help_text="Select the campus the student is on", null=False, blank=False)
     voted = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
     def __str__(self):
         return self.username
-
-
