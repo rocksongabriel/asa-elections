@@ -14,6 +14,15 @@ class ElectoralCommisionMember(models.Model):
         (CITY_CAMPUS, "City Campus",),
     )
 
+    class POSITION_LEVEL(models.IntegerChoices):
+
+        LEVEL_ONE = 1, "One"
+        LEVEL_TWO = 2, "Two"
+        LEVEL_THREE = 3, "Three"
+        LEVEL_FOUR = 4, "Four"
+        LEVEL_FIVE = 5, "Five"
+
+
     campus = models.CharField(_("Campus"), choices=CAMPUS, default=MAIN_CAMPUS, max_length=20,
                               help_text="Select the campus the student is on", null=False, blank=False)
 
@@ -32,6 +41,8 @@ class ElectoralCommisionMember(models.Model):
         help_text="Enter the position held by this member",
         default=""
     )
+    position_level = models.IntegerField(choices=POSITION_LEVEL.choices, default=POSITION_LEVEL.LEVEL_FIVE,
+                                      help_text="Select how high in the order of power this board member is, 1 is highest")
     picture = models.ImageField(
         _("Picture of Board Member"),
         upload_to="board-member/picture/",
@@ -53,3 +64,8 @@ class ElectoralCommisionMember(models.Model):
             return 'No Image Found'
 
     image_tag.short_description = 'Image'
+
+    class Meta:
+        ordering = ["position_level"]
+        verbose_name = "Electoral Commission Board Member"
+        verbose_name_plural = "Electoral Commission Board Members"
