@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth import get_user, get_user_model
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.db import IntegrityError
 
 
 # Custom User Manager
@@ -16,19 +17,27 @@ class CustomUserManager(UserManager):
         # generate password
         password = self.make_random_password(length=8)
         # create user account
-        self.create_user(username=student_id, email=email, campus=campus, password=password)
-        # send email
-        subject = "Credentials to vote in the ASA Elections 2021"
-        message = f"Student ID: {student_id}\nPassword:{password}\n\nUse it to login so that you can vote."
-        send_mail(
-            subject=subject,
-            message=message, 
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[email],
-            fail_silently=False,
-        )
-        print("Account Created for {student_id} and Email Sent to {email} Successfully")
-
+        try:
+            self.create_user(username=student_id, email=email, campus=campus, password=password)
+            print(f"----------------- Account created for {student_id} -------------------")
+        except IntegrityError as e:
+            print(f"Error {e} occurred")
+        else:
+            # send email
+            subject = "Credentials to vote in the ASA Elections 2021"
+            message = f"PLEASE USE THIS TO LOG IN\n\nStudent ID: {student_id}\nPassword: {password}\n\nUse it to login so that you can vote."
+            send_mail(
+                subject=subject,
+                message=message, 
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[email],
+                fail_silently=False,
+            )
+            # Get user and mark user as credentials_sent
+            user = get_user_model().objects.get(username=student_id)
+            user.credentials_sent = True
+            user.save()
+            print(f"----------------- Email for {student_id} account sent to {email} successfully --------------------")
 
 
 class User(AbstractUser):
@@ -45,6 +54,7 @@ class User(AbstractUser):
     campus = models.CharField(_("Campus"), choices=CAMPUS, default=MAIN_CAMPUS, max_length=20,
                               help_text="Select the campus the student is on", null=False, blank=False)
     voted = models.BooleanField(default=False)
+    credentials_sent = models.BooleanField(_("Credentials Sent"), default=False)
 
     objects = CustomUserManager()
 
