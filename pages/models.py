@@ -5,6 +5,18 @@ from django.utils.safestring import mark_safe
 
 class ElectoralCommisionMember(models.Model):
     """Model to represent member of the EC board"""
+
+    MAIN_CAMPUS = "MC"
+    CITY_CAMPUS = "CC"
+
+    CAMPUS = (
+        (MAIN_CAMPUS, "Main Campus",),
+        (CITY_CAMPUS, "City Campus",),
+    )
+
+    campus = models.CharField(_("Campus"), choices=CAMPUS, default=MAIN_CAMPUS, max_length=20,
+                              help_text="Select the campus the student is on", null=False, blank=False)
+
     name = models.CharField(
         _("Name of Board Member"),
         max_length=50,
