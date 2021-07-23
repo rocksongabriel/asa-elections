@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
+from django.utils.text import slugify
 
 from .models import Candidate, Category, PageControlPanel
 
@@ -72,15 +73,15 @@ class VotingPage(CustomLoginRequiredMixin, TemplateView):
                 if 'upvote' in key:
                     # Get the full name from the key
                     full_name = " ".join([name.capitalize() for name in key.split("_")[1].split("-")])
-                    # Get the candidate's full name
-                    candidate = Candidate.objects.get(full_name=full_name)
+                    slug = slugify(full_name)
+                    candidate = Candidate.objects.get(slug=slug)
                     # Increase the yes count of the candidate
                     candidate.yes_vote()
                 elif 'downvote' in key:
                     # Get the full name from the key
                     full_name = " ".join([name.capitalize() for name in key.split("_")[1].split("-")])
-                    # Get the candidate's full name
-                    candidate = Candidate.objects.get(full_name=full_name)
+                    slug = slugify(full_name)
+                    candidate = Candidate.objects.get(slug=slug)
                     # Increase the no count of the candidate
                     candidate.no_vote()
         else: # Increase number of votes
@@ -89,8 +90,8 @@ class VotingPage(CustomLoginRequiredMixin, TemplateView):
                 if 'upvote' in key:
                     # Get the full name from the key
                     full_name = " ".join([name.capitalize() for name in key.split("_")[1].split("-")])
-                    # Get the candidate using the full name
-                    candidate = Candidate.objects.get(full_name=full_name)
+                    slug = slugify(full_name)
+                    candidate = Candidate.objects.get(slug=slug)
                     # Upvote the candidate 
                     candidate.upvote()
 
