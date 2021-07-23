@@ -8,14 +8,14 @@
 <div class="my-16 md:my-20 mx-5 md:mx-10 lg:mx-16  font-raleway">
     <h1 class="text-center shadow-md text-gray-600 text-4xl sm:text-5xl font-extrabold py-6 mb-2 font-raleway">Electoral Commission Board Members</h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-20">
 
         {% for member in ec_board_members %}
 
             <div class="shadow-2xl p-5 bg-gray-50" data-aos="flip-right" data-aos-delay="50" data-aos-duration="200"> 
                 <!-- render the picture of the member from the form-->
                 <div class="">
-                    <img src="{{ member.picture.url }}" class="w-full h-80">
+                    <img src="{{ member.picture.url }}" class="w-full h-96">
                 </div>
 
                 <!-- render the name of the member -->
@@ -28,6 +28,10 @@
                     {{ member.position }}
                 </h1>
 
+                <!-- render the campus -->
+                <h1 class="text-xl text-center text-purple-600 font-bold">
+                    {{ member.get_campus_display }}
+                </h1>
 
             </div>
         {% endfor %}
