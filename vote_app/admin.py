@@ -5,7 +5,6 @@ from .models import Candidate, Category, PageControlPanel, Support
 class CandidateInline(admin.TabularInline):
     model = Candidate
     extra = 0
-    min_num = 1
     show_change_link = True
 
     readonly_fields = ("slug", "number_of_votes", "no", "yes",)
