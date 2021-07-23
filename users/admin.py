@@ -7,8 +7,8 @@ User = get_user_model()
 
 class UserAdmin(admin.ModelAdmin):
     search_fields = ("username", "email",)
-    list_filter = ("voted",)
-    list_display = ("username", "first_name", "last_name", "campus", "email", "voted",)
+    list_filter = ("voted", "credentials_sent", "campus",)
+    list_display = ("username", "first_name", "last_name", "campus", "email", "voted", "credentials_sent",)
     readonly_fields = ("password", "voted",)
     
 
