@@ -157,7 +157,7 @@ class ResultPageView(DetailView):
 
     def get(self, request, slug):
         control_panel = PageControlPanel.objects.first()
-        if control_panel.enable_voting_page:
+        if control_panel.enable_results_page:
             category = Category.objects.get(slug=slug)
             if category.candidates.count() == 1: # If it is only one candidate, render a different template
                 return render(request, "vote/new-result-page-individual.html", {"category": category})
