@@ -8,7 +8,7 @@ class CandidateInline(admin.TabularInline):
     min_num = 1
     show_change_link = True
 
-    readonly_fields = ("number_of_votes", "no", "yes",)
+    readonly_fields = ("slug", "number_of_votes", "no", "yes",)
 
 
 @admin.register(Category)
@@ -22,7 +22,7 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Candidate)
 class CandidateAdmin(admin.ModelAdmin):
     list_display = ("full_name", "image_tag", "category", "number_of_votes", "vetting_score", "yes", "no",)
-    readonly_fields = ("number_of_votes", "no", "yes",)
+    readonly_fields = ("slug", "number_of_votes", "no", "yes",)
 
 
 @admin.register(Support)
