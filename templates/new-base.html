@@ -3,14 +3,14 @@
 <html lang="en">
 <head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  {% comment %} <script async src="https://www.googletagmanager.com/gtag/js?id=UA-202368454-2"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-202368454-2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'UA-202368454-2');
-  </script> {% endcomment %}
+  </script>
 
 
   <meta charset="UTF-8">
@@ -51,8 +51,9 @@
           {% if user.is_authenticated %}
             <a href="{% url 'users:logout' %}" class="nav-link">logout {{ user.username }} !!!</a>
           {% else %}
-            <a href="{% url 'users:login' %}" class="nav-link">login</a>
-            <a href="#" class="nav-link">contact support</a>
+            <a href="{% url 'users:login' %}" class="text-pink-600 nav-link">login</a>
+            <a href="{% url 'pages:home' %}#support" class="nav-link">contact support</a>
+            <a href="{% url 'pages:home' %}#info" class="nav-link">how to vote</a>
           {% endif %}
         </div>
       </div>
@@ -80,7 +81,8 @@
         <a href="{% url 'users:logout' %}" class="mobile-nav-link">logout {{ user.username }} !!!</a>
       {% else %}
         <a href="{% url 'users:login' %}" class="mobile-nav-link">login</a>
-        <a href="#" class="mobile-nav-link">contact support</a>
+        <a href="{% url 'pages:home' %}#support" class="mobile-nav-link">contact support</a>
+        <a href="{% url 'pages:home' %}#info" class="mobile-nav-link">how to vote</a>
       {% endif %}
       <a href="{% url 'pages:ec-board-page' %}" class="mobile-nav-link">electoral board members</a>
       <a href="{% url 'vote_app:results' %}" class="mobile-nav-link">election results</a>
@@ -109,10 +111,10 @@
         <h2 class="text-3xl font-bold text-center"><span class="text-red-600 font-lato">ASA</span>elections 2021</h2>
         <div class="flex flex-col space-y-2 px-10">
           <h3 class="text-xl border-b text-center font-bold text-blue-500 mt-4 uppercase font-raleway pb-1">Useful Links</h3>
-          <a href="#" class="text-lg hover:text-gray-400 font-arvo transition delay-75 duration-75">electoral board members</a>
-          <a href="#" class="text-lg hover:text-gray-400 font-arvo transition delay-75 duration-75">election results</a>
-          <a href="#" class="text-lg hover:text-gray-400 font-arvo transition delay-75 duration-75">contact support</a>
-          <a href="#" class="text-lg hover:text-gray-400 font-arvo transition delay-75 duration-75">info on voting</a>
+          <a href="{% url 'pages:ec-board-page' %}" class="text-lg hover:text-gray-400 font-arvo transition delay-75 duration-75">electoral board members</a>
+          <a href="{% url 'vote_app:results' %}" class="text-lg hover:text-gray-400 font-arvo transition delay-75 duration-75">election results</a>
+          <a href="{% url 'pages:home' %}#support" class="text-lg hover:text-gray-400 font-arvo transition delay-75 duration-75">contact support</a>
+          <a href="{% url 'pages:home' %}#info" class="text-lg hover:text-gray-400 font-arvo transition delay-75 duration-75">info on voting</a>
         </div>
       </div>
 
