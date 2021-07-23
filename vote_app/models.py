@@ -35,7 +35,7 @@ class Category(models.Model):
                             help_text="Slug of the category",
                             unique=True,
                             default="")
-    voters = models.ManyToManyField(User, related_name="voted_categories")
+    voters = models.ManyToManyField(User, related_name="voted_categories", blank=True)
 
     def __str__(self):
         return self.name
