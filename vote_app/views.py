@@ -77,6 +77,11 @@ class VotingPage(CustomLoginRequiredMixin, TemplateView):
                     candidate = Candidate.objects.get(slug=slug)
                     # Increase the yes count of the candidate
                     candidate.yes_vote()
+                     # Get the user and add him to the voters of the category
+                    voter = request.user
+                    # Add the voter to the category's voters
+                    category.voters.add(voter)
+
                 elif 'downvote' in key:
                     # Get the full name from the key
                     full_name = " ".join([name.capitalize() for name in key.split("_")[1].split("-")])
@@ -84,6 +89,11 @@ class VotingPage(CustomLoginRequiredMixin, TemplateView):
                     candidate = Candidate.objects.get(slug=slug)
                     # Increase the no count of the candidate
                     candidate.no_vote()
+                     # Get the user and add him to the voters of the category
+                    voter = request.user
+                    # Add the voter to the category's voters
+                    category.voters.add(voter)
+
         else: # Increase number of votes
             # Get the upvote key if we are working with multiple candidates
             for key in request.POST.keys():
@@ -94,12 +104,10 @@ class VotingPage(CustomLoginRequiredMixin, TemplateView):
                     candidate = Candidate.objects.get(slug=slug)
                     # Upvote the candidate 
                     candidate.upvote()
-
-        # Get the user and add him to the voters of the category
-        voter = request.user
-        
-        # Add the voter to the category's voters
-        category.voters.add(voter)
+                     # Get the user and add him to the voters of the category
+                    voter = request.user
+                    # Add the voter to the category's voters
+                    category.voters.add(voter)
 
         # Check the forms validity and save it
         if formset.is_valid():

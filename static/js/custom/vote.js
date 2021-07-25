@@ -1,4 +1,3 @@
-// Prevent the form from getting submitted if the user hasn't voted
 let form = document.getElementById("vote-form");
 let checkboxes = document.getElementsByClassName("input-checkbox");
 let vote_buttons = document.getElementsByClassName("checkbox-btn");
@@ -102,11 +101,13 @@ for (checkbox of checkboxes) {
     })
 }
 
+// Downvote an individual 
 down_vote_btn.addEventListener("click", () => {
     voted_icon.classList.remove(...["fa-caret-up", "text-green-600"])
     voted_icon.classList.add(...["fa-caret-down", "text-red-600"])
 })
 
+// Upvote an individual
 up_vote_btn.addEventListener("click", () => {
     voted_icon.classList.remove(...["fa-caret-down", "text-red-600"])
     voted_icon.classList.add(...["fa-caret-up", "text-green-600"])
