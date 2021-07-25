@@ -126,6 +126,4 @@ node_modules/
 
 generate_ids.py
 
-city-campus.csv
-
-main-campus.csv
+*.csv

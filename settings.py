@@ -86,13 +86,13 @@ if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = 'smtp.gmail.com'
     # EMAIL_PORT = 587 # ! - if the Can't assign address error comes up, remove this line
-    EMAIL_HOST_USER = 'eccitycampus.asaelections2021@gmail.com'
+    EMAIL_HOST_USER = 'ec.asaelections2021@gmail.com'
     EMAIL_HOST_PASSWORD = 'mbJKKR5kDmzguKs'
     EMAIL_USE_TLS = True
     EMAIL_USE_SSL = False
 
-    DEFAULT_FROM_EMAIL = 'eccitycampus.asaelections2021@gmail.com'
-    SERVER_EMAIL = 'eccitycampus.asaelections2021@gmail.com'
+    DEFAULT_FROM_EMAIL = 'ec.asaelections2021@gmail.com'
+    SERVER_EMAIL = 'ec.asaelections2021@gmail.com'
 
 if not DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

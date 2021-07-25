@@ -1,13 +1,18 @@
-from vote_app.models import Category
-from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
-from vote_app.forms import SupportForm
-from django.core.mail import send_mail
 from django.conf import settings
+from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from django.views.generic import ListView, TemplateView
+from vote_app.forms import SupportForm
+from vote_app.models import Category
 
 from .models import ElectoralCommisionMember
+
+if "mailer" in settings.INSTALLED_APPS:
+    from mailer import send_mail
+else:
+    from django.core.mail import send_mail
+
 
 class HomePage(TemplateView):
     template_name = "pages/new-homepage.html"
