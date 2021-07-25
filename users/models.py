@@ -1,11 +1,14 @@
-from django.db import models
-from django.contrib.auth.models import AbstractUser, UserManager
-from django.utils.translation import gettext_lazy as _
-from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth import get_user, get_user_model
-from django.core.exceptions import ValidationError, ObjectDoesNotExist
-from django.db import IntegrityError
+from django.contrib.auth.models import AbstractUser, UserManager
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.db import IntegrityError, models
+from django.utils.translation import gettext_lazy as _
+
+if "mailer" in settings.INSTALLED_APPS:
+    from mailer import send_mail
+else:
+    from django.core.mail import send_mail
 
 
 # Custom User Manager
@@ -21,6 +24,8 @@ class CustomUserManager(UserManager):
             self.create_user(username=student_id, email=email, campus=campus, password=password)
             print(f"----------------- Account created for {student_id} -------------------")
         except IntegrityError as e:
+            print(f"Error {e} occurred")
+        except ValueError as e:
             print(f"Error {e} occurred")
         else:
             # send email
