@@ -81,13 +81,22 @@ LOGOUT_REDIRECT_URL = reverse_lazy("pages:home")
 
 # TODO - add email settings
 
+# Environment Variable for the password
+import environ
+env_var = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+# reading .env file
+environ.Env.read_env()
+
 # EMAIL SETTINGS
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = 'smtp.gmail.com'
     # EMAIL_PORT = 587 # ! - if the Can't assign address error comes up, remove this line
     EMAIL_HOST_USER = 'ec.asaelections2021@gmail.com'
-    EMAIL_HOST_PASSWORD = 'mbJKKR5kDmzguKs'
+    EMAIL_HOST_PASSWORD = env_var("EMAIL_PASSWORD")
     EMAIL_USE_TLS = True
     EMAIL_USE_SSL = False
 
@@ -99,7 +108,7 @@ if not DEBUG:
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_PORT = 587
     EMAIL_HOST_USER = 'ec.asaelections2021@gmail.com'
-    EMAIL_HOST_PASSWORD = 'mbJKKR5kDmzguKs'
+    EMAIL_HOST_PASSWORD = env_var("EMAIL_PASSWORD")
     EMAIL_USE_TLS = True
     EMAIL_USE_SSL = False
 

@@ -8,3 +8,4 @@ django-debug-toolbar==3.2.1
 Werkzeug==2.0.1
 bpython==0.21
 django-mailer==2.1 
+django-environ-2==2.1.0
