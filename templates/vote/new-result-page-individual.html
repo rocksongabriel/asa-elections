@@ -6,7 +6,7 @@
 {% block content %}
 
 <div class="my-16 md:my-20 mx-5 md:mx-10 lg:mx-16  font-raleway">
-    <h1 class="text-center shadow-md text-gray-600 text-4xl sm:text-5xl font-extrabold py-6 mb-2 font-raleway">{{ category.name }}</h1>
+    <h1 class="text-center shadow-md text-gray-600 text-4xl sm:text-5xl font-extrabold py-6 mb-2 font-raleway">{{ category.name }} - <span class="text-purple-600">{{ category.get_campus_display }}</span></h1>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-20">
 
@@ -40,20 +40,42 @@
         {% endfor %}
     </div>
 
-    <!-- Render links to other result pages -->
-    {% if categories.count %}
+    {% if user.is_authenticated %}
+        <!-- Render links to other result pages -->
+        {% if categories.count %}
 
-        <h2 class="text-center bg-gray-100 text-pink-600 capitalize shadow-xl text-3xl font-bold py-4">Other results</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10 my-16">
-            {% for category in categories %}
-                <a href="{% url 'vote_app:result' category.slug %}" class="bg-gray-50 text-black hover:text-white p-10 text-center border border-gray-50 text-2xl font-bold shadow-xl hover:bg-gray-900 transition delay-100 duration-100 ease-linear" data-aos="fade-right" data-aos-duration="300">
-                    <h2>{{ category.name }}</h2>
-                </a>
+            <h2 class="text-center bg-gray-100 text-pink-600 capitalize shadow-xl text-3xl font-bold py-4 uppercase">Results from other categories</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10 my-16">
+                {% for category in categories %}
+                    <a href="{% url 'vote_app:result' category.slug %}" class="bg-gray-50 text-black hover:text-white p-10 text-center border border-gray-50 text-2xl font-bold shadow-xl hover:bg-gray-900 transition delay-100 duration-100 ease-linear" data-aos="fade-right" data-aos-duration="300">
+                        <h2>{{ category.name }}</h2>
+                    </a>
 
-            {% endfor %}
-        </div>
+                {% endfor %}
+            </div>
 
+        {% endif %}
+
+    {% else %}
+        <!-- Render links to other result pages -->
+        {% if categories.count %}
+
+            <h2 class="text-center bg-gray-100 text-pink-600 uppercase shadow-xl text-3xl font-bold py-4">Results from other categories</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10 my-16">
+                {% for category in categories %}
+                    <a href="{% url 'vote_app:result' category.slug %}" 
+                        class=" bg-gray-50 text-black hover:text-white p-10 text-center border border-gray-50 text-3xl font-bold shadow-xl hover:bg-gray-900 transition delay-100 duration-100 ease-linear" 
+                        data-aos="fade-right" 
+                        data-aos-delay="100" 
+                        data-aos-duration="500">
+                        {{ category.name }}<span class="text-base text-purple-600 block">{{ category.get_campus_display }}</span>
+                    </a>
+                {% endfor %}
+            </div>
+
+        {% endif %}
     {% endif %}
 </div>
 
