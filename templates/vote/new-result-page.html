@@ -65,6 +65,22 @@
             </div>
         {% endfor %}
     </div>
+
+    <!-- Render links to other result pages -->
+    {% if categories.count %}
+
+        <h2 class="text-center bg-gray-100 text-pink-600 capitalize shadow-xl text-3xl font-bold py-4">Other results</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10 my-16">
+            {% for category in categories %}
+                <a href="{% url 'vote_app:result' category.slug %}" class=" bg-gray-700 text-white p-8 text-center border border-gray-300 text-2xl font-bold shadow-xl rounded hover:bg-gray-900 transition delay-100 duration-100 ease-linear" data-aos="fade-right" data-aos-duration="300">
+                    <h2>{{ category.name }}</h2>
+                </a>
+
+            {% endfor %}
+        </div>
+
+    {% endif %}
 </div>
 
 {% endif %}
