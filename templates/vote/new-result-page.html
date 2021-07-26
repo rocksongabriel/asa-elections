@@ -1,4 +1,5 @@
 {% extends 'new-base.html' %}
+{% load vote_percentage %}
 
 {% block title %}Results of {{ category.name }} portfolio {% endblock %}
 
@@ -26,8 +27,9 @@
                 </div>
 
                 <div class="my-2 font-raleway"> <!-- display number of votes-->
-                    <h1 class="text-4xl text-center text-gray-100 py-4 font-bold">
-                        Votes - <span class="text-green-700 font-extrabold">{{ candidate.number_of_votes }}</span>
+                    <h1 class="text-3xl text-center text-gray-100 py-4 font-bold flex flex-col">
+                        <span>Votes - <span class="text-green-700 font-extrabold">{{ candidate.number_of_votes }}</span></span>
+                        <span class="text-green-700 text-xl">( {{ candidate.number_of_votes|as_percentage_of:category.voters.count }} )</span>
                     </h1>
                 </div>
 
@@ -76,8 +78,9 @@
                 </div>
 
                 <div class="my-2 font-raleway"> <!-- display number of votes-->
-                    <h1 class="text-4xl text-center text-gray-100 py-4 font-bold">
-                        Votes - <span class="text-green-700 font-extrabold">{{ candidate.number_of_votes }}</span>
+                    <h1 class="text-3xl text-center text-gray-100 py-4 font-bold flex flex-col">
+                        <span>Votes - <span class="text-green-700 font-extrabold">{{ candidate.number_of_votes }}</span></span>
+                        <span class="text-green-700 text-xl">( {{ candidate.number_of_votes|as_percentage_of:category.voters.count }} )</span>
                     </h1>
                 </div>
 
