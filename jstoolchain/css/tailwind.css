@@ -28,7 +28,7 @@
 }
 
 .alert-box-1-main-text {
-    @apply text-4xl md:text-5xl px-2 font-bold text-center text-blue-800;
+    @apply text-4xl md:text-5xl px-2 font-bold text-center text-blue-800 font-raleway;
 }
 
 .alert-box-1-other-text {
