@@ -9,7 +9,11 @@
 <div class="my-16 md:my-20 mx-5 md:mx-10 lg:mx-16  font-raleway">
     <h1 class="text-center shadow-md text-gray-600 text-4xl sm:text-5xl font-extrabold py-6 mb-2 font-raleway">{{ category.name }} - <span class="text-purple-600">{{ category.get_campus_display }}</span></h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-20">
+    <div class="mt-4">
+        <p class="text-gray-800 text-2xl font-bold font-arvo">Total Votes Cast: <span class="text-pink-600">{{ category.voters.count }}</span></p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-12">
 
         {% for candidate in category.candidates.all %}
 
