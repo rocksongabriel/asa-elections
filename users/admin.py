@@ -1,15 +1,16 @@
 from users.models import UserCredential
 from django.contrib import admin
 from django.contrib.auth import get_user_model
+from django.contrib.auth.admin import UserAdmin
 
 User = get_user_model()
 
 
-class UserAdmin(admin.ModelAdmin):
+class UserAdmin(UserAdmin):
     search_fields = ("username", "email",)
     list_filter = ("voted", "credentials_sent", "campus",)
     list_display = ("username", "first_name", "last_name", "campus", "email", "voted", "credentials_sent",)
-    readonly_fields = ("password", "voted",)
+    readonly_fields = ("password", "voted", "date_joined", "last_login", "user_permissions", "groups", )
     
 
 
