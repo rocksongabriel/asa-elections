@@ -94,7 +94,7 @@ environ.Env.read_env()
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = 'smtp.gmail.com'
-    # EMAIL_PORT = 587 # ! - if the Can't assign address error comes up, remove this line
+    EMAIL_PORT = 587 # ! - if the Can't assign address error comes up, remove this line
     EMAIL_HOST_USER = 'ec.asaelections2021@gmail.com'
     EMAIL_HOST_PASSWORD = env_var("EMAIL_PASSWORD")
     EMAIL_USE_TLS = True

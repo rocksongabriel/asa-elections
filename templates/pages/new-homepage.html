@@ -143,6 +143,30 @@
         
                     <div class="flex flex-col my-2">
                         <label 
+                            for="{{ form.campus.id_for_label }}" 
+                            class="text-lg font-bold text-gray-700"
+                        >
+                            {{ form.campus.label }}
+                        </label>
+
+                        <select 
+                            name="{{ form.campus.name }}" 
+                            id="{{ form.campus.id_for_label }}" 
+                            class="border-2 border-purple-600 focus:outline-none px-3 py-2 text-lg bg-white" 
+                            data-title="Select Campus"
+                            required
+                        >
+                            {% for x,y in form.fields.campus.choices %}
+                                <option value="{{ x }}"{% if form.fields.campus.value == x %} selected{% endif %}>{{ y }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <small class="text-blue-600 font-bold">{{ form.campus.help_text }}</small>
+                    </div>
+        
+
+                    <div class="flex flex-col my-2">
+                        <label 
                             for="{{ form.email_address.id_for_label }}" 
                             class="text-lg font-bold text-gray-700"
                         >

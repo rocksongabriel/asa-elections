@@ -8,4 +8,4 @@ class SupportForm(forms.ModelForm):
 
     class Meta:
         model = Support
-        fields = ["full_name", "student_id", "email_address", "message"]
+        fields = ["full_name", "student_id", "campus", "email_address", "message"]

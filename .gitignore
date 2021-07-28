@@ -131,3 +131,5 @@ generate_ids.py
 
 .env-local
 .dockerignore
+
+data.tar.gz
