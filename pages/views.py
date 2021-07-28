@@ -18,12 +18,13 @@ class HomePage(TemplateView):
     template_name = "pages/new-homepage.html"
     form_class = SupportForm
 
-    def support_request_mail(self, full_name, student_id, email_address, msg):
+    def support_request_mail(self, full_name, student_id, campus, email_address, msg):
         email_template = "vote/email/support-submitted.html"
         subject = "Voter with Issue"
         context = {
             "full_name": full_name,
             "student_id": student_id,
+            "campus": campus,
             "email_address": email_address,
             "msg": msg
         }
@@ -54,6 +55,7 @@ class HomePage(TemplateView):
             self.support_request_mail(
                 form.cleaned_data["full_name"],
                 form.cleaned_data["student_id"],
+                form.cleaned_data["campus"],
                 form.cleaned_data["email_address"],
                 form.cleaned_data["message"]
             )
