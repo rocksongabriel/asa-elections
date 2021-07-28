@@ -127,8 +127,18 @@ class Candidate(models.Model):
 
 class Support(models.Model):
     """Model for the support form"""
+    MAIN_CAMPUS = "MC"
+    CITY_CAMPUS = "CC"
+
+    CAMPUS = (
+        (MAIN_CAMPUS, "Main Campus",),
+        (CITY_CAMPUS, "City Campus",),
+    )
+
     full_name = models.CharField(_("Full Name"), max_length=50, help_text="Enter your full name", null=False, blank=False)
     student_id = models.CharField(_("Student ID"), max_length=20, help_text="Enter your ID", null=False, blank=False)
+    campus = models.CharField(_("Campus"), choices=CAMPUS, default=MAIN_CAMPUS, max_length=20,
+                              help_text="Select your campus", null=False, blank=False)
     email_address = models.EmailField(_("Email Address"), max_length=300, help_text="Enter your email address", blank=False, null=True)
     message = models.TextField(_("Complaint"), max_length=1000, help_text="Enter your message", null=False, blank=False)
 
