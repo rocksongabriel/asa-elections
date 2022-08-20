@@ -4,9 +4,7 @@
 # this functionality by simply removing the wrapping tags.
 # </WARNING>
 
-# <DOCKER_FROM>
-FROM divio/base:4.18-py3.6-slim-stretch
-# </DOCKER_FROM>
+FROM divio/base:1.2-py3.8-slim-buster
 
 # <NPM>
 # </NPM>
